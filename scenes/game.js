@@ -6,14 +6,8 @@ export default class Game extends Phaser.Scene{
 
     }
 
-    //1200x600
-
     create(){
-        
+        this.add.text(600,300,'hello')
 
-    }
-
-    update(){
-        
     }
 }
