@@ -1,8 +1,7 @@
 import Phaser, {Physics} from 'phaser'
 import Game from '../scenes/game'
 import Characters from '../scenes/characters'
-import * as SceneKeys from '../utilities/sceneKeys'
-
+import TitleScene from '../scenes/titleScene'
 
 
 const config={
@@ -20,7 +19,8 @@ const config={
 
 const game =new Phaser.Game(config)
 
-game.scene.add(SceneKeys.Characters, Characters)
-game.scene.add(SceneKeys.Game, Game)
+game.scene.add('title-screen',TitleScene)
+game.scene.add('characters-screen', Characters)
+game.scene.add('game-screen', Game)
 
-game.scene.start(SceneKeys.Characters)
+game.scene.start('title-screen')
