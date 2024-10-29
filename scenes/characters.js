@@ -36,8 +36,8 @@ export default class Characters extends Phaser.Scene{
         this.yellowcar.on('pointerdown', () => this.startGame('yellowcar'));
         this.greencar.on('pointerdown', () => this.startGame('greencar'));
     }
-    
+
     startGame(selectedCar) {
-        this.scene.start('game-screen');
+        this.scene.start('game-screen', {selectedCar});
     }
 }
