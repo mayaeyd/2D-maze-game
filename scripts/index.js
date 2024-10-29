@@ -1,5 +1,6 @@
 import Phaser, {Physics} from 'phaser'
 import Game from '../scenes/game'
+import Characters from '../scenes/characters'
 
 
 const config={
@@ -15,7 +16,8 @@ const config={
     }
 }
 
-const game =new Phaser.Game(config) //scene :screen page
+const game =new Phaser.Game(config)
 
+game.scene.add('characters-screen', Characters)
 game.scene.add('game-screen', Game)
-game.scene.start('game-screen')
+game.scene.start('characters-screen')
