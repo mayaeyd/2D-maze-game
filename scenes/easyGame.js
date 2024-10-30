@@ -96,7 +96,7 @@ export default class EasyGame extends Phaser.Scene{
     }
 
     reachFinish = ()=>{
-        this.scene.start('win-screen', {car: this.selectedCar});  
+        this.scene.start('win-screen', {car: this.selectedCar, level: 1});  
     }
 
     // reachFinish = (car)=>{
