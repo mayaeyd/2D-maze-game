@@ -44,7 +44,7 @@ export default class Win extends Phaser.Scene{
             });
         }
         else if(this.level==2){
-            this.add.text(600, 100, 'You reached the finish line and still had fuel in the tank!', { 
+            this.add.text(600, 100, 'You reached the finish line and \n still had fuel in the tank!', { 
                 fontFamily: '"Press Start 2P"',
                 fontSize: '32px', 
                 color: '#fff' 
@@ -71,7 +71,18 @@ export default class Win extends Phaser.Scene{
             });
         }
         else if(this.level==3){
-
+            this.add.text(600, 275, 'Congratulations!!!', { 
+                fontFamily: '"Press Start 2P"',
+                fontSize: '32px', 
+                color: '#fff' 
+            }).setOrigin(0.5);
+    
+            this.add.text(600, 325, 'You finished the game🎉', { 
+                fontFamily: '"Press Start 2P"',
+                fontSize: '20px', 
+                color: '#fff' 
+            }).setOrigin(0.5);
+            
         }
     }
 }
