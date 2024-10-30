@@ -1,4 +1,6 @@
 import Phaser from "phaser";
+import tiles from './../assets/tiles.png'
+import tilemap from './../assets/tilemap.json'
 
 export default class Preloader extends Phaser.Scene{
     constructor(){
@@ -11,8 +13,8 @@ export default class Preloader extends Phaser.Scene{
     }
 
     preload(){
-        this.car= this.load.image(this.selectedCar, `./../assets/${this.selectedCar}.png`);
-        
+        this.load.image('tiles',tiles)
+        this.load.tilemapTiledJSON('maze',tilemap)
     }
 
     create(){

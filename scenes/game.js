@@ -16,8 +16,6 @@ export default class Game extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image('tiles', tiles);
-        this.load.tilemapTiledJSON('maze',tilemap);
         this.load.image('pinkcar', 'assets/pinkcar.png');
         this.load.image('yellowcar', 'assets/yellowcar.png');
         this.load.image('greencar', 'assets/greencar.png');
@@ -27,7 +25,12 @@ export default class Game extends Phaser.Scene{
 
        console.log('in game',this.car);
 
-       //this.physics.add.existing(this.car, true)
+       const map = this.make.tilemap({key: 'maze'})
+       const tileset = map.addTilesetImage('tilemap','tiles')
+
+       map.createLayer('Tile Layer 1', tileset)
+
+
        this.car = this.physics.add.sprite(50,50,this.car)
        this.car.setCollideWorldBounds(true,1,1)
 
@@ -36,6 +39,11 @@ export default class Game extends Phaser.Scene{
 
     update(){
 
+        this.processPlayerInput();        
+
+    }
+
+    processPlayerInput(){
         /**@type {Phaser.Physics.Arcade.StaticBody} */
         const carBody=this.car.body
 
@@ -59,14 +67,6 @@ export default class Game extends Phaser.Scene{
             carBody.updateFromGameObject()
             this.car.rotation= Phaser.Math.DegToRad(-90)
         }
-
-        
-
-        // Optional: Adjust angle if you want to rotate the car when it moves
-        if (this.car.body.velocity.x !== 0 || this.car.body.velocity.y !== 0) {
-            this.car.rotation = Phaser.Math.Angle.Between(0, 0, this.car.body.velocity.x, this.car.body.velocity.y);
-        }
-
     }
 
 }
