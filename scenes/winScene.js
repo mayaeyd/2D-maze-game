@@ -23,7 +23,7 @@ export default class Win extends Phaser.Scene{
                 color: '#fff' 
             }).setOrigin(0.5);
     
-            this.add.text(600, 200, 'Click on your car to go to the next level...', { 
+            this.add.text(600, 200, 'Click on your car to go to the moderate level...', { 
                 fontFamily: '"Press Start 2P"',
                 fontSize: '16px', 
                 color: '#fff' 
@@ -44,10 +44,34 @@ export default class Win extends Phaser.Scene{
             });
         }
         else if(this.level==2){
-
+            this.add.text(600, 100, 'You reached the finish line and still had fuel in the tank!', { 
+                fontFamily: '"Press Start 2P"',
+                fontSize: '32px', 
+                color: '#fff' 
+            }).setOrigin(0.5);
+    
+            this.add.text(600, 200, 'Click on your car to go to the hard level...', { 
+                fontFamily: '"Press Start 2P"',
+                fontSize: '16px', 
+                color: '#fff' 
+            }).setOrigin(0.5);
+            
+            this.add.text(600, 250, 'Do not forget to pick up the passengers', { 
+                fontFamily: '"Press Start 2P"',
+                fontSize: '16px', 
+                color: '#fff' 
+            }).setOrigin(0.5);
+    
+            this.car = this.physics.add.sprite(600,400,this.selectedCar)  
+           .setScale(3);
+    
+            this.car.setInteractive();
+            this.car.on('pointerdown', () => {
+                this.scene.start('hard-screen',{car:this.selectedCar});
+            });
         }
         else if(this.level==3){
-            
+
         }
     }
 }

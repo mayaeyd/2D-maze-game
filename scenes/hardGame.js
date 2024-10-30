@@ -7,7 +7,7 @@ import finish from './../assets/finish.png'
 export default class ModerateGame extends Phaser.Scene{
 
     constructor(){
-        super('moderate-screen');
+        super('hard-screen');
     }
 
     init(data) {
@@ -95,7 +95,7 @@ export default class ModerateGame extends Phaser.Scene{
     }
 
     reachFinish = ()=>{
-        this.scene.start('win-screen', {car: this.selectedCar, level: 2});  
+        this.scene.start('win-screen', {car: this.selectedCar, level: 3});  
     }
 
 }

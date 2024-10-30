@@ -5,6 +5,8 @@ import Preloader from '../scenes/preloader'
 import EasyGame from '../scenes/easyGame'
 import Win from '../scenes/winScene'
 import ModerateGame from '../scenes/moderateGame'
+import HardGame from '../scenes/hardGame'
+
 
 
 
@@ -19,7 +21,7 @@ const config={
             debug:true
         }
     },
-    scene: [TitleScene, Characters, Preloader, EasyGame, Win, ModerateGame]
+    scene: [TitleScene, Characters, Preloader, EasyGame, Win, ModerateGame, HardGame]
 }
 
 const game =new Phaser.Game(config)
