@@ -2,13 +2,13 @@ import Phaser, {Physics} from 'phaser'
 import TitleScene from '../scenes/titleScene'
 import Characters from '../scenes/characters'
 import Preloader from '../scenes/preloader'
-import Game from '../scenes/game'
+import EasyGame from '../scenes/game'
 
 
 
 
 const config={
-    width: 1200,
+    width: 1184,
     height: 600,
     type: Phaser.AUTO,
     physics:{
@@ -18,7 +18,7 @@ const config={
             debug:true
         }
     },
-    scene: [TitleScene, Characters, Preloader, Game]
+    scene: [TitleScene, Characters, Preloader, EasyGame]
 }
 
 const game =new Phaser.Game(config)

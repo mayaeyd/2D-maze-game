@@ -4,7 +4,7 @@ import tiles from './../assets/tiles.png'
 import tilemap from '../assets/tilemap.json'
 
 
-export default class Game extends Phaser.Scene{
+export default class EasyGame extends Phaser.Scene{
 
     constructor(){
         super('easy-screen')
