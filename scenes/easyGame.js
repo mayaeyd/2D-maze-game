@@ -13,7 +13,7 @@ export default class EasyGame extends Phaser.Scene{
 
     init(data) {
         //get the selected car
-        this.car= data.selectedCar; 
+        this.selectedCar= data.selectedCar; 
     }
 
     preload(){
@@ -36,9 +36,9 @@ export default class EasyGame extends Phaser.Scene{
        wallsLayer.setCollisionByProperty({collides : true})
 
 
-       this.car = this.physics.add.sprite(45,50,this.car)  
+       this.car = this.physics.add.sprite(45,50,this.selectedCar)  
        .setScale(0.6);
-       this.car.body.setSize(this.car.displayWidth, this.car.displayHeight);
+       this.car.body.setSize(this.car.displayWidth, this.car.displayHeight);  //physics body
        this.car.body.setOffset(
         (this.car.width - this.car.displayWidth) / 2,
         (this.car.height - this.car.displayHeight) / 2
@@ -52,10 +52,10 @@ export default class EasyGame extends Phaser.Scene{
         (this.finish.height - this.finish.displayHeight) / 2
         );
        
-       //this.finish.setImmovable(true);  //doesn't move upon collision
-
        this.physics.add.collider(this.car, wallsLayer);
        this.physics.add.collider(this.car, this.finish, this.reachFinish);
+
+       this.car.body.allowRotation = true
 
        this.cursors= this.input.keyboard.createCursorKeys()  // cursors UP DOWN LEFT RIGHT    
     }
@@ -71,6 +71,7 @@ export default class EasyGame extends Phaser.Scene{
             this.car.setVelocityX(-200);
             this.car.setVelocityY(0);
             this.car.rotation= Phaser.Math.DegToRad(90);
+            
         } 
         else if (this.cursors.right.isDown) {
             this.car.setVelocityX(200);
@@ -95,9 +96,13 @@ export default class EasyGame extends Phaser.Scene{
     }
 
     reachFinish = ()=>{
-        this.scene.start('win-screen');  
+        this.scene.start('win-screen', {car: this.selectedCar});  
     }
 
+    // reachFinish = (car)=>{
+    //     this.scene.start('win-screen', {car});  
+    // }
+    //: { x: this.car.x, y: this.car.y, texture: this.car.texture.key, scale: this.car.scaleX } 
 }
 
 
