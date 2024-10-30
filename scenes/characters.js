@@ -17,13 +17,6 @@ export default class Characters extends Phaser.Scene{
         this.load.image('pinkcar',pinkcar);
         this.load.image('yellowcar',yellowcar);
         this.load.image('greencar',greencar);
-        
-        this.load.on('filecomplete-image-pinkcar', (fileKey, file) => {
-            console.log(`Image ${fileKey} loaded successfully`);
-        });
-        this.load.on('loaderror', (file) => {
-            console.error(`Failed to load ${file.key}`);
-        });
     }
 
     //1200x600
