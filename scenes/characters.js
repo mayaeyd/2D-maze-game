@@ -28,9 +28,17 @@ export default class Characters extends Phaser.Scene{
         })
         .setOrigin(0.5, 0.5)
 
-        this.pinkcar= this.add.image(300,300,'pinkcar').setInteractive();
-        this.yellowcar= this.add.image(600,300,'yellowcar').setInteractive();
-        this.greencar= this.add.image(900,300,'greencar').setInteractive();
+        this.pinkcar= this.add.image(300,300,'pinkcar')
+        .setInteractive()
+        .setScale(3.4);
+
+        this.yellowcar= this.add.image(600,300,'yellowcar')
+        .setInteractive()
+        .setScale(2.9);
+
+        this.greencar= this.add.image(900,300,'greencar')
+        .setInteractive()
+        .setScale(3.7);
 
         this.pinkcar.on('pointerdown', () => this.startGame('pinkcar'));
         this.yellowcar.on('pointerdown', () => this.startGame('yellowcar'));
