@@ -36,7 +36,7 @@ export default class EasyGame extends Phaser.Scene{
        wallsLayer.setCollisionByProperty({collides : true})
 
 
-       this.car = this.physics.add.sprite(45,50,this.car)  //create car and resize
+       this.car = this.physics.add.sprite(45,50,this.car)  
        .setScale(0.6);
        this.car.body.setSize(this.car.displayWidth, this.car.displayHeight);
        this.car.body.setOffset(
@@ -62,8 +62,7 @@ export default class EasyGame extends Phaser.Scene{
 
     update(){
         
-        this.processPlayerInput();
-        //this.checkCollision();    
+        this.processPlayerInput();   
 
     }
 
@@ -95,8 +94,8 @@ export default class EasyGame extends Phaser.Scene{
         }  
     }
 
-    reachFinish(){
-        console.log("car reached finish line");  
+    reachFinish = ()=>{
+        this.scene.start('win-screen');  
     }
 
 }

@@ -3,6 +3,7 @@ import TitleScene from '../scenes/titleScene'
 import Characters from '../scenes/characters'
 import Preloader from '../scenes/preloader'
 import EasyGame from '../scenes/easyGame'
+import Win from '../scenes/winScene'
 
 
 
@@ -18,7 +19,7 @@ const config={
             debug:true
         }
     },
-    scene: [TitleScene, Characters, Preloader, EasyGame]
+    scene: [TitleScene, Characters, Preloader, EasyGame, Win]
 }
 
 const game =new Phaser.Game(config)
