@@ -24,7 +24,7 @@ export default class ModerateGame extends Phaser.Scene{
     }
 
     create(){
-        console.log('in game',this.car);
+        console.log('in hard game',this.car);
 
        const map = this.make.tilemap({key: 'maze'})
        const tileset = map.addTilesetImage('raceTileMap','tiles')
@@ -95,7 +95,7 @@ export default class ModerateGame extends Phaser.Scene{
     }
 
     reachFinish = ()=>{
-        this.scene.start('win-screen', {car: this.selectedCar, level: 3});  
+        this.scene.start('win-screen', {car: this.selectedCar, level: 'finished'});  
     }
 
 }

@@ -16,7 +16,7 @@ export default class Win extends Phaser.Scene{
     }
 
     create(){
-        if(this.level==1){
+        if(this.level=='moderate'){
             this.add.text(600, 100, 'You reached the finish line!', { 
                 fontFamily: '"Press Start 2P"',
                 fontSize: '32px', 
@@ -35,15 +35,11 @@ export default class Win extends Phaser.Scene{
                 color: '#fff' 
             }).setOrigin(0.5);
     
-            this.car = this.physics.add.sprite(600,400,this.selectedCar)  
-           .setScale(3);
-    
-            this.car.setInteractive();
-            this.car.on('pointerdown', () => {
-                this.scene.start('moderate-screen',{car:this.selectedCar});
-            });
+            this.addCarImage(this.car, this.level);
         }
-        else if(this.level==2){
+
+        //moderate level 
+        else if(this.level=='hard'){
             this.add.text(600, 100, 'You reached the finish line and \n still had fuel in the tank!', { 
                 fontFamily: '"Press Start 2P"',
                 fontSize: '32px', 
@@ -56,21 +52,17 @@ export default class Win extends Phaser.Scene{
                 color: '#fff' 
             }).setOrigin(0.5);
             
-            this.add.text(600, 250, 'Do not forget to pick up the passengers', { 
+            this.add.text(600, 250, 'But do not forget to pick up the passengers', { 
                 fontFamily: '"Press Start 2P"',
                 fontSize: '16px', 
                 color: '#fff' 
             }).setOrigin(0.5);
-    
-            this.car = this.physics.add.sprite(600,400,this.selectedCar)  
-           .setScale(3);
-    
-            this.car.setInteractive();
-            this.car.on('pointerdown', () => {
-                this.scene.start('hard-screen',{car:this.selectedCar});
-            });
+            
+            this.addCarImage(this.car,this.level);
         }
-        else if(this.level==3){
+
+        //hard level
+        else if(this.level=='finished'){
             this.add.text(600, 275, 'Congratulations!!!', { 
                 fontFamily: '"Press Start 2P"',
                 fontSize: '32px', 
@@ -85,4 +77,16 @@ export default class Win extends Phaser.Scene{
             
         }
     }
+
+    addCarImage(car, level){
+        const selectedCar = this.selectedCar
+        car = this.physics.add.sprite(600,400,selectedCar)  
+        .setScale(3);
+    
+        car.setInteractive();
+        car.on('pointerdown', () => {
+        this.scene.start(`${level}-screen`,{car:selectedCar});
+        });
+    }
+    
 }
