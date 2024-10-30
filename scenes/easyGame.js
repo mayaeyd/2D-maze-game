@@ -36,10 +36,14 @@ export default class EasyGame extends Phaser.Scene{
        wallsLayer.setCollisionByProperty({collides : true})
 
 
-       this.car = this.physics.add.sprite(45,50,this.car)
-       .setScale(0.2);
-       this.finish = this.physics.add.sprite(780,405,'finish')
+       this.car = this.physics.add.sprite(45,50,this.car)  //create car and resize
+       .setScale(0.6);
+       
+
+       this.finish = this.physics.add.staticSprite(780,405,'finish')
        .setScale(0.07);
+       
+       
        //this.finish.setImmovable(true);  //doesn't move upon collision
 
        this.physics.add.collider(this.car, wallsLayer);
