@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 import WebFontFile from './webFontFile'
 import tiles from './../assets/tiles.png'
-import tilemap from './../assets/tilemap.json'
+import tilemap from '../assets/tilemap.json'
 
 
 export default class Game extends Phaser.Scene{
@@ -26,9 +26,14 @@ export default class Game extends Phaser.Scene{
        console.log('in game',this.car);
 
        const map = this.make.tilemap({key: 'maze'})
-       const tileset = map.addTilesetImage('tilemap','tiles')
+       const tileset = map.addTilesetImage('raceTileMap','tiles')
 
-       map.createLayer('Tile Layer 1', tileset)
+       map.createLayer('Ground', tileset)
+
+       
+       const wallsLayer = map.createLayer('Walls', tileset,0,0);
+
+       wallsLayer.setCollisionByProperty({collides : true})
 
 
        this.car = this.physics.add.sprite(50,50,this.car)
@@ -48,22 +53,22 @@ export default class Game extends Phaser.Scene{
         const carBody=this.car.body
 
         if(this.cursors.up.isDown){
-            this.car.y -=5
+            this.car.y -=3
             carBody.updateFromGameObject() 
             this.car.rotation= Phaser.Math.DegToRad(180) 
         }
         else if(this.cursors.down.isDown){
-            this.car.y +=5
+            this.car.y +=3
             carBody.updateFromGameObject()
             this.car.rotation= Phaser.Math.DegToRad(0)
         }
         else if(this.cursors.left.isDown){
-            this.car.x -=5
+            this.car.x -=3
             carBody.updateFromGameObject()
             this.car.rotation= Phaser.Math.DegToRad(90)
         }
         else if(this.cursors.right.isDown){
-            this.car.x +=5
+            this.car.x +=3
             carBody.updateFromGameObject()
             this.car.rotation= Phaser.Math.DegToRad(-90)
         }
