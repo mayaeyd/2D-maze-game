@@ -4,6 +4,9 @@ import WebFontFile from './webFontFile'
 
 export default class TitleScene extends Phaser.Scene {
     
+    constructor(){
+        super('title-screen')
+    }
 
     preload() {
         const fonts = new WebFontFile(this.load, 'Press Start 2P')

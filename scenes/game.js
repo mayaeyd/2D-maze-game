@@ -1,20 +1,33 @@
 import Phaser from 'phaser'
 import WebFontFile from './webFontFile'
+import tiles from './../assets/tiles.png'
+import tilemap from './../assets/tilemap.json';
 
 
 export default class Game extends Phaser.Scene{
 
+    constructor(){
+        super('game-screen')
+    }
+
     init(data) {
         //get the selected car
-        this.selectedCar= data.selectedCar; 
-        console.log('Selected Car:', this.selectedCar);
+        this.car= data.selectedCar; 
     }
 
     preload(){
-        this.load.image(this.selectedCar, `assets/${this.selectedCar}.png`);
+        this.load.image('tiles', tiles)
+        this.load.tilemapTiledJSON('maze',tilemap) 
     }
 
     create(){
-        this.add.text(600,300,'game')
+
+       console.log('in game',this.car);
+        
+       this.map = this.add.tilemap({key:'maze'})
+       this.maze = this.map.addTilesetImage('tilemap', 'tiles')
+
+       this.map.createStaticLayer('Ground', this.maze)
+       
     }
 }

@@ -1,22 +1,29 @@
 import Phaser from 'phaser'
 import WebFontFile from './webFontFile'
-import {Game} from './../utilities/sceneKeys'
+import pinkcar from './../assets/pinkcar.png'
+import yellowcar from './../assets/yellowcar.png';
+import greencar from './../assets/greencar.png';
 
 export default class Characters extends Phaser.Scene{
 
-    // constructor() {
-    //     super('Characters');
-    // }
+    constructor(){
+        super('characters-screen')
+    }
 
     preload(){
         const fonts = new WebFontFile(this.load, 'Press Start 2P')
         this.load.addFile(fonts)
 
-        this.load.image('pinkcar','assets/pinkcar.png');
-        this.load.image('yellowcar','assets/yellowcar.png');
-        this.load.image('greencar','assets/greencar.png');
+        this.load.image('pinkcar',pinkcar);
+        this.load.image('yellowcar',yellowcar);
+        this.load.image('greencar',greencar);
         
-
+        this.load.on('filecomplete-image-pinkcar', (fileKey, file) => {
+            console.log(`Image ${fileKey} loaded successfully`);
+        });
+        this.load.on('loaderror', (file) => {
+            console.error(`Failed to load ${file.key}`);
+        });
     }
 
     //1200x600
@@ -38,6 +45,6 @@ export default class Characters extends Phaser.Scene{
     }
 
     startGame(selectedCar) {
-        this.scene.start('game-screen', {selectedCar});
+        this.scene.start('preloader', {selectedCar});
     }
 }
