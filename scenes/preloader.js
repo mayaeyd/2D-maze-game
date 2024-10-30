@@ -22,6 +22,6 @@ export default class Preloader extends Phaser.Scene{
     }
 
     startGame(selectedCar){
-        this.scene.start('game-screen',{selectedCar})
+        this.scene.start('easy-screen',{selectedCar})
     }
 }

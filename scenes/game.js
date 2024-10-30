@@ -7,7 +7,7 @@ import tilemap from '../assets/tilemap.json'
 export default class Game extends Phaser.Scene{
 
     constructor(){
-        super('game-screen')
+        super('easy-screen')
     }
 
     init(data) {
@@ -52,7 +52,11 @@ export default class Game extends Phaser.Scene{
 
     update(){
         
+        this.processPlayerInput();    
 
+    }
+
+    processPlayerInput(){
         if (this.cursors.left.isDown) {
             this.car.setVelocityX(-200);
             this.car.setVelocityY(0);
@@ -77,35 +81,7 @@ export default class Game extends Phaser.Scene{
         else {
             this.car.setVelocityX(0);
             this.car.setVelocityY(0);
-        }   
-        //this.processPlayerInput();    
-
-    }
-
-    processPlayerInput(){
-        /**@type {Phaser.Physics.Arcade.StaticBody} */
-        const carBody=this.car.body
-
-        if(this.cursors.up.isDown){
-            this.car.y -=3
-            carBody.updateFromGameObject() 
-            this.car.rotation= Phaser.Math.DegToRad(180)
-        }
-        else if(this.cursors.down.isDown){
-            this.car.y +=3
-            carBody.updateFromGameObject()
-            this.car.rotation= Phaser.Math.DegToRad(0)
-        }
-        else if(this.cursors.left.isDown){
-            this.car.x -=3
-            carBody.updateFromGameObject()
-            this.car.rotation= Phaser.Math.DegToRad(90) 
-        }
-        else if(this.cursors.right.isDown){
-            this.car.x +=3
-            carBody.updateFromGameObject()
-            this.car.rotation= Phaser.Math.DegToRad(-90)
-        }
+        }  
     }
 
 }
