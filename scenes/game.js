@@ -31,20 +31,54 @@ export default class Game extends Phaser.Scene{
        map.createLayer('Ground', tileset)
 
        
-       const wallsLayer = map.createLayer('Walls', tileset,0,0);
+       const wallsLayer = map.createLayer('Walls', tileset);
 
        wallsLayer.setCollisionByProperty({collides : true})
 
 
-       this.car = this.physics.add.sprite(50,50,this.car)
-       this.car.setCollideWorldBounds(true,1,1)
+       this.car = this.physics.add.sprite(45,50,this.car)
+       .setScale(0.6);
+
+       this.physics.add.collider(this.car, wallsLayer);
+
+    //    const scaledWidth = this.car.width * 0.6;
+    //     const scaledHeight = this.car.height * 0.6;
+    //     this.car.body.setSize(scaledWidth, scaledHeight);
+
+       //this.car.body.allowRotation = true;
 
        this.cursors= this.input.keyboard.createCursorKeys()  // cursors UP DOWN LEFT RIGHT    
     }
 
     update(){
+        
 
-        this.processPlayerInput();        
+        if (this.cursors.left.isDown) {
+            this.car.setVelocityX(-200);
+            this.car.setVelocityY(0);
+            this.car.rotation= Phaser.Math.DegToRad(90);
+        } 
+        else if (this.cursors.right.isDown) {
+            this.car.setVelocityX(200);
+            this.car.setVelocityY(0);
+            this.car.rotation= Phaser.Math.DegToRad(-90)
+        } 
+    
+        else if (this.cursors.up.isDown) {
+            this.car.setVelocityY(-200);
+            this.car.setVelocityX(0);
+            this.car.rotation= Phaser.Math.DegToRad(180)
+        } 
+        else if (this.cursors.down.isDown) {
+            this.car.setVelocityY(200);
+            this.car.setVelocityX(0);
+            this.car.rotation= Phaser.Math.DegToRad(0)
+        } 
+        else {
+            this.car.setVelocityX(0);
+            this.car.setVelocityY(0);
+        }   
+        //this.processPlayerInput();    
 
     }
 
@@ -55,7 +89,7 @@ export default class Game extends Phaser.Scene{
         if(this.cursors.up.isDown){
             this.car.y -=3
             carBody.updateFromGameObject() 
-            this.car.rotation= Phaser.Math.DegToRad(180) 
+            this.car.rotation= Phaser.Math.DegToRad(180)
         }
         else if(this.cursors.down.isDown){
             this.car.y +=3
@@ -65,7 +99,7 @@ export default class Game extends Phaser.Scene{
         else if(this.cursors.left.isDown){
             this.car.x -=3
             carBody.updateFromGameObject()
-            this.car.rotation= Phaser.Math.DegToRad(90)
+            this.car.rotation= Phaser.Math.DegToRad(90) 
         }
         else if(this.cursors.right.isDown){
             this.car.x +=3
