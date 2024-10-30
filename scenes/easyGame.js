@@ -38,11 +38,19 @@ export default class EasyGame extends Phaser.Scene{
 
        this.car = this.physics.add.sprite(45,50,this.car)  //create car and resize
        .setScale(0.6);
-       
+       this.car.body.setSize(this.car.displayWidth, this.car.displayHeight);
+       this.car.body.setOffset(
+        (this.car.width - this.car.displayWidth) / 2,
+        (this.car.height - this.car.displayHeight) / 2
+        );
 
        this.finish = this.physics.add.staticSprite(780,405,'finish')
        .setScale(0.07);
-       
+       this.finish.body.setSize(this.finish.displayWidth, this.finish.displayHeight);
+       this.finish.body.setOffset(
+        (this.finish.width - this.finish.displayWidth) / 2,
+        (this.finish.height - this.finish.displayHeight) / 2
+        );
        
        //this.finish.setImmovable(true);  //doesn't move upon collision
 
