@@ -37,13 +37,13 @@ export default class EasyGame extends Phaser.Scene{
 
 
        this.car = this.physics.add.sprite(45,50,this.car)
-       .setScale(0.6);
-       this.finish = this.add.image(780,405,'finish')
+       .setScale(0.2);
+       this.finish = this.physics.add.sprite(780,405,'finish')
        .setScale(0.07);
-       this.finish.setImmovable(true);  //doesn't move upon collision
+       //this.finish.setImmovable(true);  //doesn't move upon collision
 
        this.physics.add.collider(this.car, wallsLayer);
-       this.physics.add.collider(this.car, this.finish);
+       this.physics.add.collider(this.car, this.finish, this.reachFinish);
 
        this.cursors= this.input.keyboard.createCursorKeys()  // cursors UP DOWN LEFT RIGHT    
     }
@@ -83,4 +83,10 @@ export default class EasyGame extends Phaser.Scene{
         }  
     }
 
+    reachFinish(){
+        console.log("car reached finish line");  
+    }
+
 }
+
+
