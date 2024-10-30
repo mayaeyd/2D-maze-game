@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 import WebFontFile from './webFontFile'
 import tiles from './../assets/tiles.png'
 import tilemap from '../assets/tilemap.json'
+import finish from './../assets/finish.png'
 
 
 export default class EasyGame extends Phaser.Scene{
@@ -19,6 +20,7 @@ export default class EasyGame extends Phaser.Scene{
         this.load.image('pinkcar', 'assets/pinkcar.png');
         this.load.image('yellowcar', 'assets/yellowcar.png');
         this.load.image('greencar', 'assets/greencar.png');
+        this.load.image('finish',finish)
     }
 
     create(){
@@ -29,8 +31,6 @@ export default class EasyGame extends Phaser.Scene{
        const tileset = map.addTilesetImage('raceTileMap','tiles')
 
        map.createLayer('Ground', tileset)
-
-       
        const wallsLayer = map.createLayer('Walls', tileset);
 
        wallsLayer.setCollisionByProperty({collides : true})
@@ -38,21 +38,20 @@ export default class EasyGame extends Phaser.Scene{
 
        this.car = this.physics.add.sprite(45,50,this.car)
        .setScale(0.6);
+       this.finish = this.add.image(780,405,'finish')
+       .setScale(0.07);
+       this.finish.setImmovable(true);  //doesn't move upon collision
 
        this.physics.add.collider(this.car, wallsLayer);
-
-    //    const scaledWidth = this.car.width * 0.6;
-    //     const scaledHeight = this.car.height * 0.6;
-    //     this.car.body.setSize(scaledWidth, scaledHeight);
-
-       //this.car.body.allowRotation = true;
+       this.physics.add.collider(this.car, this.finish);
 
        this.cursors= this.input.keyboard.createCursorKeys()  // cursors UP DOWN LEFT RIGHT    
     }
 
     update(){
         
-        this.processPlayerInput();    
+        this.processPlayerInput();
+        //this.checkCollision();    
 
     }
 
