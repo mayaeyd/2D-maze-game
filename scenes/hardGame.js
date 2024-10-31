@@ -59,7 +59,7 @@ export default class HardGame extends Phaser.Scene{
         ];
 
         this.characters = [];
-
+        
         positions.forEach(pos => {
 
             const spriteKey = Math.random() < 0.5 ? 'male' : 'female';
@@ -73,6 +73,15 @@ export default class HardGame extends Phaser.Scene{
             this.characters.push(this.character);
             this.physics.add.collider(this.car, this.character, this.incrementPoints)
         });
+
+        this.fuelTanks = this.physics.add.group();
+        this.fuel=150;
+        this.maxFuel = 150;
+
+       this.fuelBar = this.add.graphics();
+       this.drawFuelBar();
+
+       
 
        this.finish = this.physics.add.staticSprite(780,405,'finish')
        .setScale(0.07);
@@ -97,7 +106,12 @@ export default class HardGame extends Phaser.Scene{
 
     update(){
         
-        this.processPlayerInput();   
+        this.processPlayerInput();  
+        
+        if (this.fuel === 0) {
+            this.car.body.setVelocity(0);
+            this.scene.start('lose-screen');
+        }
 
     }
 
@@ -139,9 +153,20 @@ export default class HardGame extends Phaser.Scene{
     
         character.destroy();
 
-        if (this.pointCount === 7) {
+        if (this.pointCount === 6) {
             this.collectedPeople = true;
         }
+    }
+
+    drawFuelBar() {
+        this.fuelBar.clear();
+        this.fuelBar.fillStyle(0x00ff00, 1); // green color for fuel
+        const barWidth = 200;
+        const barHeight = 20;
+        const fuelPercentage = Phaser.Math.Clamp(this.fuel / this.maxFuel, 0, 1);
+        this.fuelBar.fillRect(900, 20, barWidth * fuelPercentage, barHeight);
+        this.fuelBar.lineStyle(2, 0xffffff, 1); // white border
+        this.fuelBar.strokeRect(900, 20, barWidth, barHeight);
     }
 
     reachFinish = ()=>{
