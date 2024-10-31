@@ -75,8 +75,8 @@ export default class HardGame extends Phaser.Scene{
         });
 
         this.fuelTanks = this.physics.add.group();
-        this.fuel=150;
-        this.maxFuel = 150;
+        this.fuel=110;
+        this.maxFuel = 110;
 
        this.fuelBar = this.add.graphics();
        this.drawFuelBar();
