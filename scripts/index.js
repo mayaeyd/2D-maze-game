@@ -6,6 +6,7 @@ import EasyGame from '../scenes/easyGame'
 import Win from '../scenes/winScene'
 import ModerateGame from '../scenes/moderateGame'
 import HardGame from '../scenes/hardGame'
+import Lose from '../scenes/loseScene'
 
 
 const config={
@@ -19,7 +20,7 @@ const config={
             debug:false
         }
     },
-    scene: [TitleScene, Characters, Preloader, EasyGame, Win, ModerateGame, HardGame]
+    scene: [TitleScene, Characters, Preloader, EasyGame, Win, ModerateGame, HardGame, Lose]
 }
 
 const game =new Phaser.Game(config)
