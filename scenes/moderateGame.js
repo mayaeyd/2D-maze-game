@@ -71,7 +71,7 @@ export default class ModerateGame extends Phaser.Scene{
         
         this.processPlayerInput(); 
         if (this.car.body.velocity.x !== 0 || this.car.body.velocity.y !== 0) {
-            this.fuel -= 1; 
+            this.fuel -= 0.1; 
             if (this.fuel < 0) this.fuel = 0; 
             this.drawFuelBar(); 
         }

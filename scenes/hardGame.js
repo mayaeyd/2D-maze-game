@@ -3,8 +3,11 @@ import WebFont from "webfontloader";
 import tiles from './../assets/tiles.png'
 import tilemap from '../assets/tilemap.json'
 import finish from './../assets/finish.png'
+import male from './../assets/male.png'
+import female from './../assets/female.png'
 
-export default class ModerateGame extends Phaser.Scene{
+
+export default class HardGame extends Phaser.Scene{
 
     constructor(){
         super('hard-screen');
@@ -20,6 +23,8 @@ export default class ModerateGame extends Phaser.Scene{
         this.load.image('pinkcar', 'assets/pinkcar.png');
         this.load.image('yellowcar', 'assets/yellowcar.png');
         this.load.image('greencar', 'assets/greencar.png');
+        this.load.image('male', male);
+        this.load.image('female', female);
         this.load.image('finish',finish)
     }
 
@@ -43,6 +48,32 @@ export default class ModerateGame extends Phaser.Scene{
         (this.car.height - this.car.displayHeight) / 2
         );
 
+        const positions = [
+            { x: 100, y: 170 },
+            { x: 200, y: 240 },
+            { x: 300, y: 580 },
+            { x: 400, y: 250 },
+            { x: 500, y: 150 },
+            { x: 600, y: 250 },
+            { x: 650, y: 180 }
+        ];
+
+        this.characters = [];
+
+        positions.forEach(pos => {
+
+            const spriteKey = Math.random() < 0.5 ? 'male' : 'female';
+
+            this.character = this.physics.add.staticSprite(pos.x, pos.y, spriteKey).setScale(0.06);
+            this.character.body.setSize(this.character.displayWidth, this.character.displayHeight);  //physics body
+            this.character.body.setOffset(
+                (this.character.width - this.character.displayWidth) / 2,
+                (this.character.height - this.character.displayHeight) / 2
+            );
+            this.characters.push(this.character);
+            this.physics.add.collider(this.car, this.character, this.incrementPoints)
+        });
+
        this.finish = this.physics.add.staticSprite(780,405,'finish')
        .setScale(0.07);
        this.finish.body.setSize(this.finish.displayWidth, this.finish.displayHeight);
@@ -50,9 +81,14 @@ export default class ModerateGame extends Phaser.Scene{
         (this.finish.width - this.finish.displayWidth) / 2,
         (this.finish.height - this.finish.displayHeight) / 2
         );
+
+        this.pointCount=0;
+        this.collectedPeople=false;
+
+       this.points= this.add.text(900,300,`Points: ${this.pointCount}`);
        
        this.physics.add.collider(this.car, wallsLayer);
-       this.physics.add.collider(this.car, this.finish, this.reachFinish); //
+       this.physics.add.collider(this.car, this.finish, this.reachFinish);
 
        this.car.body.allowRotation = true
 
@@ -94,8 +130,24 @@ export default class ModerateGame extends Phaser.Scene{
         }
     }
 
+    incrementPoints=(car, character)=>{
+        this.pointCount += 1;
+
+        if (this.points) {
+            this.points.setText(`Points: ${this.pointCount}`);
+        }
+    
+        character.destroy();
+
+        if (this.pointCount === 7) {
+            this.collectedPeople = true;
+        }
+    }
+
     reachFinish = ()=>{
-        this.scene.start('win-screen', {car: this.selectedCar, level: 'finished'});  
+        if (this.collectedPeople){
+            this.scene.start('win-screen', {car: this.selectedCar, level: 'finished'}); 
+        }return; 
     }
 
 }
