@@ -8,8 +8,6 @@ import ModerateGame from '../scenes/moderateGame'
 import HardGame from '../scenes/hardGame'
 
 
-
-
 const config={
     width: 1200,
     height: 576,
