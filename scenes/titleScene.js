@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import WebFontFile from './webFontFile'
-
+import background from './../assets/title-bg.jpg'
 
 export default class TitleScene extends Phaser.Scene {
     
@@ -11,20 +11,23 @@ export default class TitleScene extends Phaser.Scene {
     preload() {
         const fonts = new WebFontFile(this.load, 'Press Start 2P')
         this.load.addFile(fonts)
+        this.load.image('background',background)
     }
 
     create() {
+        this.add.image(600,288,'background')
+        .setOrigin(0.5,0.5)
+        .setScale(2.5,1.6);
 
-        console.log('in title screen');
         this.add.text(600, 200, 'Roadway Riddle', { 
             fontSize: '48px', 
-            fill: '#fff',
+            fill: 'black',
             fontFamily:'"Press Start 2P"' 
         }).setOrigin(0.5);
 
         const startButton = this.add.text(600, 400, 'Start', { 
             fontSize: '32px', 
-            fill: '#fff',
+            fill: 'black',
             fontFamily:'"Press Start 2P"' 
         }).setOrigin(0.5);
 

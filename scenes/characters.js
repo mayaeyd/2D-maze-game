@@ -3,6 +3,7 @@ import WebFontFile from './webFontFile'
 import pinkcar from './../assets/pinkcar.png'
 import yellowcar from './../assets/yellowcar.png';
 import greencar from './../assets/greencar.png';
+import charactersBG from './../assets/characters-bg.jpg'
 
 export default class Characters extends Phaser.Scene{
 
@@ -17,11 +18,16 @@ export default class Characters extends Phaser.Scene{
         this.load.image('pinkcar',pinkcar);
         this.load.image('yellowcar',yellowcar);
         this.load.image('greencar',greencar);
+        this.load.image('charactersBG',charactersBG)
     }
 
     //1200x600
 
     create(){
+        this.add.image(600,288,'charactersBG')
+        .setOrigin(0.5,0.5)
+        .setScale(2.5,2.2);
+
         const title = this.add.text(600, 75, 'Choose Your Car',{
             fontSize: 50,
             fontFamily: '"Press Start 2P"'
