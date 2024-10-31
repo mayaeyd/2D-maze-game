@@ -56,13 +56,30 @@ export default class ModerateGame extends Phaser.Scene{
 
        this.car.body.allowRotation = true
 
-       this.cursors= this.input.keyboard.createCursorKeys()
+       this.fuelTanks = this.physics.add.group();
+
+       this.cursors= this.input.keyboard.createCursorKeys();
+
+       this.fuel=100;
+       this.maxFuel = 100;
+
+       this.fuelBar = this.add.graphics();
+       this.drawFuelBar();
     }
 
     update(){
         
-        this.processPlayerInput();   
-
+        this.processPlayerInput(); 
+        if (this.car.body.velocity.x !== 0 || this.car.body.velocity.y !== 0) {
+            this.fuel -= 1; 
+            if (this.fuel < 0) this.fuel = 0; 
+            this.drawFuelBar(); 
+        }
+        
+        if (this.fuel === 0) {
+            this.car.body.setVelocity(0);
+            this.scene.start('lose-screen');
+        }
     }
 
     processPlayerInput(){
@@ -92,6 +109,17 @@ export default class ModerateGame extends Phaser.Scene{
             this.car.setVelocityX(0);
             this.car.setVelocityY(0);
         }
+    }
+
+    drawFuelBar() {
+        this.fuelBar.clear();
+        this.fuelBar.fillStyle(0x00ff00, 1); // green color for fuel
+        const barWidth = 200;
+        const barHeight = 20;
+        const fuelPercentage = Phaser.Math.Clamp(this.fuel / this.maxFuel, 0, 1);
+        this.fuelBar.fillRect(900, 20, barWidth * fuelPercentage, barHeight);
+        this.fuelBar.lineStyle(2, 0xffffff, 1); // white border
+        this.fuelBar.strokeRect(900, 20, barWidth, barHeight);
     }
 
     reachFinish = ()=>{
