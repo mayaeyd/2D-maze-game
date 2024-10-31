@@ -106,7 +106,13 @@ export default class HardGame extends Phaser.Scene{
 
     update(){
         
-        this.processPlayerInput();  
+        this.processPlayerInput(); 
+        
+        if (this.car.body.velocity.x !== 0 || this.car.body.velocity.y !== 0) {
+            this.fuel -= 0.1; 
+            if (this.fuel < 0) this.fuel = 0; 
+            this.drawFuelBar(); 
+        }
         
         if (this.fuel === 0) {
             this.car.body.setVelocity(0);
