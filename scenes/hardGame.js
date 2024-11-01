@@ -16,7 +16,6 @@ export default class HardGame extends Phaser.Scene{
     init(data) {
         //get the selected car
         this.selectedCar= data.car; 
-        console.log(this.selectedCar);
     }
 
     preload(){
@@ -29,7 +28,6 @@ export default class HardGame extends Phaser.Scene{
     }
 
     create(){
-        console.log('in hard game',this.car);
 
        const map = this.make.tilemap({key: 'maze'})
        const tileset = map.addTilesetImage('raceTileMap','tiles')

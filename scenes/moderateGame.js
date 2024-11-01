@@ -13,7 +13,6 @@ export default class ModerateGame extends Phaser.Scene{
     init(data) {
         //get the selected car
         this.selectedCar= data.car; 
-        console.log(this.selectedCar);
     }
 
     preload(){
@@ -24,8 +23,6 @@ export default class ModerateGame extends Phaser.Scene{
     }
 
     create(){
-        console.log('in moderate game',this.car);
-
        const map = this.make.tilemap({key: 'maze'})
        const tileset = map.addTilesetImage('raceTileMap','tiles')
 
@@ -52,7 +49,7 @@ export default class ModerateGame extends Phaser.Scene{
         );
        
        this.physics.add.collider(this.car, wallsLayer);
-       this.physics.add.collider(this.car, this.finish, this.reachFinish); //
+       this.physics.add.collider(this.car, this.finish, this.reachFinish); 
 
        this.car.body.allowRotation = true
 

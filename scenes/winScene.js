@@ -13,7 +13,6 @@ export default class Win extends Phaser.Scene{
         //get the selected car
         this.selectedCar= data.car; 
         this.level = data.level;
-        console.log(this.selectedCar);
     }
 
     preload(){

@@ -25,8 +25,6 @@ export default class EasyGame extends Phaser.Scene{
 
     create(){
 
-       console.log('in game',this.car);
-
        const map = this.make.tilemap({key: 'maze'})
        const tileset = map.addTilesetImage('raceTileMap','tiles')
 
@@ -98,11 +96,6 @@ export default class EasyGame extends Phaser.Scene{
     reachFinish = ()=>{
         this.scene.start('win-screen', {car: this.selectedCar, level: 'moderate'});  
     }
-
-    // reachFinish = (car)=>{
-    //     this.scene.start('win-screen', {car});  
-    // }
-    //: { x: this.car.x, y: this.car.y, texture: this.car.texture.key, scale: this.car.scaleX } 
 }
 
 

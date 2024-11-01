@@ -1,8 +1,5 @@
 export default function addGameContent(scene, car, finish){
 
-    console.log(scene,car,finish);
-    
-
     const map = scene.make.tilemap({key: 'maze'})
     const tileset = map.addTilesetImage('raceTileMap','tiles')
 

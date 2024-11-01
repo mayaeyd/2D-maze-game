@@ -21,8 +21,6 @@ export default class Characters extends Phaser.Scene{
         this.load.image('charactersBG',charactersBG)
     }
 
-    //1200x600
-
     create(){
         this.add.image(600,288,'charactersBG')
         .setOrigin(0.5,0.5)
